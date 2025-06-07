@@ -1,4 +1,4 @@
-Coffee Consumers Count
+-- Coffee Consumers Count
 SELECT 
     city_name,
     ROUND(CAST(population * 0.25 AS FLOAT) / 1000000, 2) AS coffee_consumers_in_millions,
@@ -28,7 +28,7 @@ WHERE
 GROUP BY ci.city_name
 ORDER BY total_revenue DESC;
 
-Sales Count for Each Product
+-- Sales Count for Each Product
 SELECT 
     p.product_name,
     COUNT(s.sale_id) AS total_orders
@@ -37,7 +37,7 @@ LEFT JOIN sales AS s ON s.product_id = p.product_id
 GROUP BY p.product_name
 ORDER BY total_orders DESC;
 
-Average Sales Amount per City
+-- Average Sales Amount per City
 SELECT 
     ci.city_name,
     SUM(s.total) AS total_revenue,
@@ -49,7 +49,7 @@ INNER JOIN city AS ci ON ci.city_id = c.city_id
 GROUP BY ci.city_name
 ORDER BY total_revenue DESC;
 
-City Population and Coffee Consumers (25%)
+-- City Population and Coffee Consumers (25%)
 
 WITH city_table AS 
 (
@@ -75,7 +75,7 @@ SELECT
 FROM city_table
 INNER JOIN customers_table ON city_table.city_name = customers_table.city_name;
 
-Top Selling Products by City
+-- Top Selling Products by City
 SELECT * 
 FROM (
     SELECT 
@@ -91,7 +91,7 @@ FROM (
 ) AS t1
 WHERE rank <= 3;
 
-Customer Segmentation by City
+-- Customer Segmentation by City
 SELECT 
     ci.city_name,
     COUNT(DISTINCT c.customer_id) AS unique_cx
@@ -102,7 +102,7 @@ WHERE
     s.product_id IN (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14)
 GROUP BY ci.city_name;
 
-Average Sale vs Rent
+-- Average Sale vs Rent
 WITH city_table AS
 (
     SELECT 
@@ -132,7 +132,7 @@ FROM city_rent AS cr
 INNER JOIN city_table AS ct ON cr.city_name = ct.city_name
 ORDER BY ct.avg_sale_pr_cx DESC;
 
-Monthly Sales Growth
+-- Monthly Sales Growth
 WITH monthly_sales AS
 (
     SELECT 
@@ -165,7 +165,7 @@ SELECT
 FROM growth_ratio
 WHERE last_month_sale IS NOT NULL;
 
-Market Potential Analysis
+-- Market Potential Analysis
 WITH city_table AS
 (
     SELECT 
